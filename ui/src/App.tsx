@@ -25,11 +25,11 @@ function App() {
   }, [])
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4'>
+    <div className='flex flex-col items-center justify-center gap-4 my-52'>
       <AddTaskForm fetchTasks={fetchTasks} />
       {
         allTasks.map((task) => (
-          <Task task={task} key={task._id} fetchTasks={fetchTasks}/>
+          <Task task={task} key={task._id} fetchTasks={fetchTasks} />
         ))
       }
     </div>
