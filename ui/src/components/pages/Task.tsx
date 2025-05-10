@@ -45,14 +45,14 @@ export const Task: React.FC<TaskProps> = ({ task, fetchTasks }) => {
     return (
         <div className="flex flex-col gap-4 m-3">
             {
-                <div className="flex gap-4 items-center" key={task._id}>
+                <div className="flex gap-4 items-center" key={task.id}>
                     {/* <span>{idx + 1}</span> */}
-                    <input type="checkbox" name={task.name} id={task._id} checked={task.completed} onClick={() => {
+                    <input type="checkbox" name={task.name} id={task.id} checked={task.completed} onClick={() => {
                         handleCheckmark()
                     }}
                     />
                     <span className={`w-[150px] ${task.completed ? 'line-through' : ''}`}>{task.name}</span>
-                    <Trash2 size={36} color="#f62235" className="cursor-pointer duration-400" onClick={() => handleDeleteTask(task._id)} />
+                    <Trash2 size={36} color="#f62235" className="cursor-pointer duration-400" onClick={() => handleDeleteTask(task.id)} />
                     <SquarePen size={36} color="#387aff" className="cursor-pointer duration-400" onClick={() => handleEdit(task)} />
                 </div>
             }

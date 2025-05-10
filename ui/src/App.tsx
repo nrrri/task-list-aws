@@ -29,7 +29,7 @@ function App() {
       <AddTaskForm fetchTasks={fetchTasks} />
       {
         allTasks.map((task) => (
-          <Task task={task} key={task._id} fetchTasks={fetchTasks} />
+          <Task task={task} key={task.id} fetchTasks={fetchTasks} />
         ))
       }
     </div>
