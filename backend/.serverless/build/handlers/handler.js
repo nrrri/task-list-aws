@@ -17,21 +17,48 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// handlers/createTask.ts
-var createTask_exports = {};
-__export(createTask_exports, {
-  handler: () => handler
+// handlers/handler.ts
+var handler_exports = {};
+__export(handler_exports, {
+  createTask: () => createTask,
+  deleteTaskById: () => deleteTaskById,
+  getTasks: () => getTasks,
+  updateTaskById: () => updateTaskById
 });
-module.exports = __toCommonJS(createTask_exports);
-var handler = async (event) => {
+module.exports = __toCommonJS(handler_exports);
+var getTasks = async (event) => {
+  console.log(event);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Get all tasks from db" })
+  };
+};
+var createTask = async (event) => {
   console.log(event);
   return {
     statusCode: 200,
     body: JSON.stringify({ message: "Create a task into db" })
   };
 };
+var updateTaskById = async (event) => {
+  console.log(event);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Update a task in db by id" })
+  };
+};
+var deleteTaskById = async (event) => {
+  console.log(event);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Delete a task in db by id" })
+  };
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  handler
+  createTask,
+  deleteTaskById,
+  getTasks,
+  updateTaskById
 });
-//# sourceMappingURL=createTask.js.map
+//# sourceMappingURL=handler.js.map

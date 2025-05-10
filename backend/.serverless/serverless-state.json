@@ -8,6 +8,29 @@
       "name": "aws",
       "runtime": "nodejs22.x",
       "region": "ca-central-1",
+      "iam": {
+        "role": {
+          "statements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:Scan"
+              ],
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "TasksTable",
+                    "Arn"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
       "stage": "dev",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -95,6 +118,9 @@
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/task-list-app-dev*:*:*"
                           }
                         ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iam\"][\"role\"][\"statements\"][0]"
                       }
                     ]
                   }
@@ -121,9 +147,9 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-                "S3Key": "serverless/task-list-app/dev/1746476105216-2025-05-05T20:15:05.216Z/task-list-app.zip"
+                "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
               },
-              "Handler": "handlers/getTasks.handler",
+              "Handler": "handlers/handler.getTasks",
               "Runtime": "nodejs22.x",
               "FunctionName": "task-list-app-dev-getTasks",
               "MemorySize": 1024,
@@ -150,9 +176,9 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-                "S3Key": "serverless/task-list-app/dev/1746476105216-2025-05-05T20:15:05.216Z/task-list-app.zip"
+                "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
               },
-              "Handler": "handlers/createTask.handler",
+              "Handler": "handlers/handler.createTask",
               "Runtime": "nodejs22.x",
               "FunctionName": "task-list-app-dev-createTask",
               "MemorySize": 1024,
@@ -179,14 +205,19 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-                "S3Key": "serverless/task-list-app/dev/1746476105216-2025-05-05T20:15:05.216Z/task-list-app.zip"
+                "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
               },
-              "Handler": "handlers/updateTask.handler",
+              "Handler": "handlers/handler.updateTaskById",
               "Runtime": "nodejs22.x",
               "FunctionName": "task-list-app-dev-updateTaskById",
               "MemorySize": 1024,
               "Timeout": 6,
               "Description": "update a task by id",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -203,14 +234,19 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-                "S3Key": "serverless/task-list-app/dev/1746476105216-2025-05-05T20:15:05.216Z/task-list-app.zip"
+                "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
               },
-              "Handler": "handlers/deleteTask.handler",
+              "Handler": "handlers/handler.deleteTaskById",
               "Runtime": "nodejs22.x",
               "FunctionName": "task-list-app-dev-deleteTaskById",
               "MemorySize": 1024,
               "Timeout": 6,
               "Description": "delete a task in db by id",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -222,47 +258,47 @@
               "DeleteTaskByIdLogGroup"
             ]
           },
-          "GetTasksLambdaVersionkXja34ZFHLSuTE2FHNFfuj2QiA9Mf7esm8XSXY": {
+          "GetTasksLambdaVersion2H0wmTQANr9HwNy0OuN7EuMCCcyXQ5gmwEUcm0p5sg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetTasksLambdaFunction"
               },
-              "CodeSha256": "BDO73NGItIoL+dHZxV+lbDN0VqhsfeD/P1RjBAigbZc=",
+              "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
               "Description": "get all tasks from db"
             }
           },
-          "CreateTaskLambdaVersionAQbnJ304vs4VunkWnlUtzgSHkQzNv2QYn16zz7IsI6M": {
+          "CreateTaskLambdaVersioninbQ42VxjdAxKMWVarlDgt18wuRLPVIShzq45pXbrM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateTaskLambdaFunction"
               },
-              "CodeSha256": "BDO73NGItIoL+dHZxV+lbDN0VqhsfeD/P1RjBAigbZc=",
+              "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
               "Description": "create a task into db"
             }
           },
-          "UpdateTaskByIdLambdaVersionDl4hdHxpKanMjr9YQaa88soUQ4UXyeTWOwJxaCguaI": {
+          "UpdateTaskByIdLambdaVersionDy9GOUfwrQtNXofLVcsm1xqgwGY0IcP9JgvUvQgpe0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateTaskByIdLambdaFunction"
               },
-              "CodeSha256": "BDO73NGItIoL+dHZxV+lbDN0VqhsfeD/P1RjBAigbZc=",
+              "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
               "Description": "update a task by id"
             }
           },
-          "DeleteTaskByIdLambdaVersionubMTOW5peHIAohxF3j1bxgwCvuehTucubMRYd6x9d8": {
+          "DeleteTaskByIdLambdaVersionTMMerZQ2KTGLEQZqbiXLh8y9wWvhtHNbJSQt0q7LU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteTaskByIdLambdaFunction"
               },
-              "CodeSha256": "BDO73NGItIoL+dHZxV+lbDN0VqhsfeD/P1RjBAigbZc=",
+              "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
               "Description": "delete a task in db by id"
             }
           },
@@ -489,7 +525,7 @@
               "DeleteTaskByIdLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1746476100982": {
+          "ApiGatewayDeployment1746899846065": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -651,6 +687,28 @@
                 ]
               }
             }
+          },
+          "TasksTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "TasksTable",
+              "ProvisionedThroughput": {
+                "ReadCapacityUnits": 1,
+                "WriteCapacityUnits": 1
+              },
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "taskID",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "taskID",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
           }
         },
         "Outputs": {
@@ -663,7 +721,7 @@
           "GetTasksLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetTasksLambdaVersionkXja34ZFHLSuTE2FHNFfuj2QiA9Mf7esm8XSXY"
+              "Ref": "GetTasksLambdaVersion2H0wmTQANr9HwNy0OuN7EuMCCcyXQ5gmwEUcm0p5sg"
             },
             "Export": {
               "Name": "sls-task-list-app-dev-GetTasksLambdaFunctionQualifiedArn"
@@ -672,7 +730,7 @@
           "CreateTaskLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateTaskLambdaVersionAQbnJ304vs4VunkWnlUtzgSHkQzNv2QYn16zz7IsI6M"
+              "Ref": "CreateTaskLambdaVersioninbQ42VxjdAxKMWVarlDgt18wuRLPVIShzq45pXbrM"
             },
             "Export": {
               "Name": "sls-task-list-app-dev-CreateTaskLambdaFunctionQualifiedArn"
@@ -681,7 +739,7 @@
           "UpdateTaskByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateTaskByIdLambdaVersionDl4hdHxpKanMjr9YQaa88soUQ4UXyeTWOwJxaCguaI"
+              "Ref": "UpdateTaskByIdLambdaVersionDy9GOUfwrQtNXofLVcsm1xqgwGY0IcP9JgvUvQgpe0"
             },
             "Export": {
               "Name": "sls-task-list-app-dev-UpdateTaskByIdLambdaFunctionQualifiedArn"
@@ -690,7 +748,7 @@
           "DeleteTaskByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteTaskByIdLambdaVersionubMTOW5peHIAohxF3j1bxgwCvuehTucubMRYd6x9d8"
+              "Ref": "DeleteTaskByIdLambdaVersionTMMerZQ2KTGLEQZqbiXLh8y9wWvhtHNbJSQt0q7LU"
             },
             "Export": {
               "Name": "sls-task-list-app-dev-DeleteTaskByIdLambdaFunctionQualifiedArn"
@@ -729,7 +787,7 @@
     "pluginsData": {},
     "functions": {
       "getTasks": {
-        "handler": "handlers/getTasks.handler",
+        "handler": "handlers/handler.getTasks",
         "description": "get all tasks from db",
         "events": [
           {
@@ -749,10 +807,10 @@
         "timeout": 6,
         "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetTasksLambdaVersionkXja34ZFHLSuTE2FHNFfuj2QiA9Mf7esm8XSXY"
+        "versionLogicalId": "GetTasksLambdaVersion2H0wmTQANr9HwNy0OuN7EuMCCcyXQ5gmwEUcm0p5sg"
       },
       "createTask": {
-        "handler": "handlers/createTask.handler",
+        "handler": "handlers/handler.createTask",
         "description": "create a task into db",
         "events": [
           {
@@ -772,10 +830,10 @@
         "timeout": 6,
         "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "CreateTaskLambdaVersionAQbnJ304vs4VunkWnlUtzgSHkQzNv2QYn16zz7IsI6M"
+        "versionLogicalId": "CreateTaskLambdaVersioninbQ42VxjdAxKMWVarlDgt18wuRLPVIShzq45pXbrM"
       },
       "updateTaskById": {
-        "handler": "handlers/updateTask.handler",
+        "handler": "handlers/handler.updateTaskById",
         "description": "update a task by id",
         "events": [
           {
@@ -787,15 +845,18 @@
           }
         ],
         "name": "task-list-app-dev-updateTaskById",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "UpdateTaskByIdLambdaVersionDl4hdHxpKanMjr9YQaa88soUQ4UXyeTWOwJxaCguaI"
+        "versionLogicalId": "UpdateTaskByIdLambdaVersionDy9GOUfwrQtNXofLVcsm1xqgwGY0IcP9JgvUvQgpe0"
       },
       "deleteTaskById": {
-        "handler": "handlers/deleteTask.handler",
+        "handler": "handlers/handler.deleteTaskById",
         "description": "delete a task in db by id",
         "events": [
           {
@@ -807,13 +868,43 @@
           }
         ],
         "name": "task-list-app-dev-deleteTaskById",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "DeleteTaskByIdLambdaVersionubMTOW5peHIAohxF3j1bxgwCvuehTucubMRYd6x9d8"
+        "versionLogicalId": "DeleteTaskByIdLambdaVersionTMMerZQ2KTGLEQZqbiXLh8y9wWvhtHNbJSQt0q7LU"
       }
+    },
+    "resources": {
+      "Resources": {
+        "TasksTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "TasksTable",
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1
+            },
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "taskID",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "taskID",
+                "KeyType": "HASH"
+              }
+            ]
+          }
+        }
+      },
+      "Outputs": {}
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless",
@@ -825,6 +916,9 @@
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "resources": {
+        "$ref": "$[\"service\"][\"resources\"]"
       }
     },
     "appId": null,
@@ -833,7 +927,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/task-list-app/dev/1746476105216-2025-05-05T20:15:05.216Z",
+    "artifactDirectoryName": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z",
     "artifact": "task-list-app.zip"
   }
 }

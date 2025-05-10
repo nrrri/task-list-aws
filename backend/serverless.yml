@@ -22,31 +22,34 @@ provider:
 functions:
   # GET
   getTasks:
-    handler: handlers/getTasks.handler
+    handler: handlers/handler.getTasks
     description: get all tasks from db
     events:
       - http:
           path: /tasks
           method: get
+
   # POST
   createTask:
-    handler: handlers/createTask.handler
+    handler: handlers/handler.createTask
     description: create a task into db
     events:
       - http:
           path: /tasks
           method: post
+
   #  PUT
   updateTaskById:
-    handler: handlers/updateTask.handler
+    handler: handlers/handler.updateTaskById
     description: update a task by id
     events:
       - http:
           path: /tasks/{taskId}
           method: put
+
   # DELETE
   deleteTaskById:
-    handler: handlers/deleteTask.handler
+    handler: handlers/handler.deleteTaskById
     description: delete a task in db by id
     events:
       - http:

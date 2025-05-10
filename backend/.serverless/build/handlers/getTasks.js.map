@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../handlers/getTasks.ts"],
-  "sourcesContent": ["import { APIGatewayProxyEvent, APIGatewayProxyResult } from \"aws-lambda\";\n\nexport const handler = async (\n  event: APIGatewayProxyEvent\n): Promise<APIGatewayProxyResult> => {\n  console.log(event);\n\n  return {\n    statusCode: 200,\n    body: JSON.stringify({ message: \"Get all tasks from db\" }),\n  };\n};\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,IAAM,UAAU,OACrB,UACmC;AACnC,UAAQ,IAAI,KAAK;AAEjB,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU,EAAE,SAAS,wBAAwB,CAAC;AAAA,EAC3D;AACF;",
-  "names": []
-}
