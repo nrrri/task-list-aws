@@ -1,0 +1,152 @@
+{
+  "/Users/ferin/Desktop/task-list-aws/backend/serverless.yml": {
+    "versionFramework": "4.14.3",
+    "servicePath": "/Users/ferin/Desktop/task-list-aws/backend/serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "org": "ferin",
+      "service": "task-list-app",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs22.x",
+        "region": "ca-central-1",
+        "stage": "dev",
+        "versionFunctions": true,
+        "environment": {
+          "IS_LOCAL": "true"
+        }
+      },
+      "functions": {
+        "getTasks": {
+          "handler": "handlers/getTasks.handler",
+          "description": "get all tasks from db",
+          "events": [
+            {
+              "http": {
+                "path": "/tasks",
+                "method": "get"
+              }
+            }
+          ],
+          "name": "task-list-app-dev-getTasks",
+          "environment": {
+            "NODE_OPTIONS": "--enable-source-maps"
+          }
+        },
+        "createTask": {
+          "handler": "handlers/createTask.handler",
+          "description": "create a task into db",
+          "events": [
+            {
+              "http": {
+                "path": "/tasks",
+                "method": "post"
+              }
+            }
+          ],
+          "name": "task-list-app-dev-createTask"
+        },
+        "updateTaskById": {
+          "handler": "handlers/updateTask.handler",
+          "description": "update a task by id",
+          "events": [
+            {
+              "http": {
+                "path": "/tasks/{taskId}",
+                "method": "put"
+              }
+            }
+          ],
+          "name": "task-list-app-dev-updateTaskById"
+        },
+        "deleteTaskById": {
+          "handler": "handlers/deleteTask.handler",
+          "description": "delete a task in db by id",
+          "events": [
+            {
+              "http": {
+                "path": "/tasks/{taskId}",
+                "method": "delete"
+              }
+            }
+          ],
+          "name": "task-list-app-dev-deleteTaskById"
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs22.x",
+      "region": "ca-central-1",
+      "stage": "dev",
+      "versionFunctions": true,
+      "environment": {
+        "IS_LOCAL": "true"
+      }
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\norg: ferin\nservice: task-list-app\n\nprovider:\n  name: aws\n  runtime: nodejs22.x\n  region: ca-central-1\n\nfunctions:\n  # GET\n  getTasks:\n    handler: handlers/getTasks.handler\n    description: get all tasks from db\n    events:\n      - http:\n          path: /tasks\n          method: get\n  # POST\n  createTask:\n    handler: handlers/createTask.handler\n    description: create a task into db\n    events:\n      - http:\n          path: /tasks\n          method: post\n  #  PUT\n  updateTaskById:\n    handler: handlers/updateTask.handler\n    description: update a task by id\n    events:\n      - http:\n          path: /tasks/{taskId}\n          method: put\n  # DELETE\n  deleteTaskById:\n    handler: handlers/deleteTask.handler\n    description: delete a task in db by id\n    events:\n      - http:\n          path: /tasks/{taskId}\n          method: delete",
+    "command": [
+      "invoke",
+      "local"
+    ],
+    "options": {
+      "function": "getTasks"
+    },
+    "orgId": "a31e8ee6-cf43-4d2a-a16f-556d473f72d5",
+    "orgName": "ferin",
+    "userId": "9Czc17FXy7LF45PMCd",
+    "userName": "ferin",
+    "serviceProviderAwsAccountId": "047719660565",
+    "serviceProviderAwsCfStackName": "task-list-app-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ca-central-1:047719660565:stack/task-list-app-dev/939439a0-2951-11f0-adc7-06506b342943",
+    "serviceProviderAwsCfStackCreated": "2025-05-05T01:37:59.511Z",
+    "serviceProviderAwsCfStackUpdated": "2025-05-05T20:15:06.926Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "GetTasksLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ca-central-1:047719660565:function:task-list-app-dev-getTasks:6",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-task-list-app-dev-GetTasksLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "DeleteTaskByIdLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ca-central-1:047719660565:function:task-list-app-dev-deleteTaskById:1",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-task-list-app-dev-DeleteTaskByIdLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateTaskLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ca-central-1:047719660565:function:task-list-app-dev-createTask:1",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-task-list-app-dev-CreateTaskLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UpdateTaskByIdLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ca-central-1:047719660565:function:task-list-app-dev-updateTaskById:1",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-task-list-app-dev-UpdateTaskByIdLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://ddcz72m392.execute-api.ca-central-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-task-list-app-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
+        "ExportName": "sls-task-list-app-dev-ServerlessDeploymentBucketName"
+      }
+    ]
+  }
+}

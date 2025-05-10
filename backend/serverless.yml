@@ -1,0 +1,70 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: ferin
+service: task-list-app
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: ca-central-1
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "dynamodb:PutItem"
+            - "dynamodb:GetItem"
+            - "dynamodb:DeleteItem"
+            - "dynamodb:Scan"
+          Resource:
+            - { "Fn::GetAtt": ["TasksTable", "Arn"] }
+
+functions:
+  # GET
+  getTasks:
+    handler: handlers/getTasks.handler
+    description: get all tasks from db
+    events:
+      - http:
+          path: /tasks
+          method: get
+  # POST
+  createTask:
+    handler: handlers/createTask.handler
+    description: create a task into db
+    events:
+      - http:
+          path: /tasks
+          method: post
+  #  PUT
+  updateTaskById:
+    handler: handlers/updateTask.handler
+    description: update a task by id
+    events:
+      - http:
+          path: /tasks/{taskId}
+          method: put
+  # DELETE
+  deleteTaskById:
+    handler: handlers/deleteTask.handler
+    description: delete a task in db by id
+    events:
+      - http:
+          path: /tasks/{taskId}
+          method: delete
+
+resources:
+  Resources:
+    TasksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TasksTable
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: taskID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: taskID
+            KeyType: HASH
