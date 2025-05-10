@@ -20,7 +20,7 @@ provider:
             - { "Fn::GetAtt": ["TasksTable", "Arn"] }
 
 functions:
-  # GET
+  # GET (All)
   getTasks:
     handler: handlers/handler.getTasks
     description: get all tasks from db
@@ -28,6 +28,15 @@ functions:
       - http:
           path: /tasks
           method: get
+
+  # # GET (One)
+  # getTask:
+  #   handler: handlers/handler.getTaskById
+  #   description: get all tasks from db
+  #   events:
+  #     - http:
+  #         path: /tasks/{id}
+  #         method: get
 
   # POST
   createTask:

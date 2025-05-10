@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
 import { UpdateTaskForm } from "./UpdateTaskForm";
 import { TaskType } from "../TaskType";
 import axios from "axios";
 import { API_URL } from "@/utils";
+import { SquarePen, Trash2 } from "lucide-react";
 
 export interface TaskProps {
     task: TaskType;
@@ -52,8 +52,8 @@ export const Task: React.FC<TaskProps> = ({ task, fetchTasks }) => {
                     }}
                     />
                     <span className={`w-[150px] ${task.completed ? 'line-through' : ''}`}>{task.name}</span>
-                    <Button onClick={() => handleDeleteTask(task._id)}>Delete</Button>
-                    <Button onClick={() => handleEdit(task)}>Edit</Button>
+                    <Trash2 size={36} color="#f62235" className="cursor-pointer duration-400" onClick={() => handleDeleteTask(task._id)} />
+                    <SquarePen size={36} color="#387aff" className="cursor-pointer duration-400" onClick={() => handleEdit(task)} />
                 </div>
             }
 

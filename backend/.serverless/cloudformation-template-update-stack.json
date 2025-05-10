@@ -126,7 +126,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-          "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
+          "S3Key": "serverless/task-list-app/dev/1746902859993-2025-05-10T18:47:39.993Z/task-list-app.zip"
         },
         "Handler": "handlers/handler.getTasks",
         "Runtime": "nodejs22.x",
@@ -155,7 +155,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-          "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
+          "S3Key": "serverless/task-list-app/dev/1746902859993-2025-05-10T18:47:39.993Z/task-list-app.zip"
         },
         "Handler": "handlers/handler.createTask",
         "Runtime": "nodejs22.x",
@@ -184,7 +184,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-          "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
+          "S3Key": "serverless/task-list-app/dev/1746902859993-2025-05-10T18:47:39.993Z/task-list-app.zip"
         },
         "Handler": "handlers/handler.updateTaskById",
         "Runtime": "nodejs22.x",
@@ -213,7 +213,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ca-central-1-0a9780f3-7202",
-          "S3Key": "serverless/task-list-app/dev/1746899850613-2025-05-10T17:57:30.613Z/task-list-app.zip"
+          "S3Key": "serverless/task-list-app/dev/1746902859993-2025-05-10T18:47:39.993Z/task-list-app.zip"
         },
         "Handler": "handlers/handler.deleteTaskById",
         "Runtime": "nodejs22.x",
@@ -237,47 +237,47 @@
         "DeleteTaskByIdLogGroup"
       ]
     },
-    "GetTasksLambdaVersion2H0wmTQANr9HwNy0OuN7EuMCCcyXQ5gmwEUcm0p5sg": {
+    "GetTasksLambdaVersionq82nft5HZoBlBjpylG2AYtqSacr4Slsz2SpjfwoszQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetTasksLambdaFunction"
         },
-        "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
+        "CodeSha256": "WyYy48fSO4hu9gfV4xYpj5QFRy0pyK7qAeuKP2SQmhE=",
         "Description": "get all tasks from db"
       }
     },
-    "CreateTaskLambdaVersioninbQ42VxjdAxKMWVarlDgt18wuRLPVIShzq45pXbrM": {
+    "CreateTaskLambdaVersion7X4cXuRuicrteaoSPkW243t2ANW1NNENVgAb6TDzbzs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateTaskLambdaFunction"
         },
-        "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
+        "CodeSha256": "WyYy48fSO4hu9gfV4xYpj5QFRy0pyK7qAeuKP2SQmhE=",
         "Description": "create a task into db"
       }
     },
-    "UpdateTaskByIdLambdaVersionDy9GOUfwrQtNXofLVcsm1xqgwGY0IcP9JgvUvQgpe0": {
+    "UpdateTaskByIdLambdaVersionXInGEBTB1M4hSfe7yRfVlPX2DZgNtfzPi3glRok": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateTaskByIdLambdaFunction"
         },
-        "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
+        "CodeSha256": "WyYy48fSO4hu9gfV4xYpj5QFRy0pyK7qAeuKP2SQmhE=",
         "Description": "update a task by id"
       }
     },
-    "DeleteTaskByIdLambdaVersionTMMerZQ2KTGLEQZqbiXLh8y9wWvhtHNbJSQt0q7LU": {
+    "DeleteTaskByIdLambdaVersiondIxvDb08o65PqlpZsJJV50u4o5Z9nrBWX9zXKvkIY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteTaskByIdLambdaFunction"
         },
-        "CodeSha256": "RiJ3w9a5jVuRHtdoMogduGTkpCKXzj3RUA+JmX+8sVo=",
+        "CodeSha256": "WyYy48fSO4hu9gfV4xYpj5QFRy0pyK7qAeuKP2SQmhE=",
         "Description": "delete a task in db by id"
       }
     },
@@ -504,7 +504,7 @@
         "DeleteTaskByIdLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1746899846065": {
+    "ApiGatewayDeployment1746902854487": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -700,7 +700,7 @@
     "GetTasksLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetTasksLambdaVersion2H0wmTQANr9HwNy0OuN7EuMCCcyXQ5gmwEUcm0p5sg"
+        "Ref": "GetTasksLambdaVersionq82nft5HZoBlBjpylG2AYtqSacr4Slsz2SpjfwoszQ"
       },
       "Export": {
         "Name": "sls-task-list-app-dev-GetTasksLambdaFunctionQualifiedArn"
@@ -709,7 +709,7 @@
     "CreateTaskLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateTaskLambdaVersioninbQ42VxjdAxKMWVarlDgt18wuRLPVIShzq45pXbrM"
+        "Ref": "CreateTaskLambdaVersion7X4cXuRuicrteaoSPkW243t2ANW1NNENVgAb6TDzbzs"
       },
       "Export": {
         "Name": "sls-task-list-app-dev-CreateTaskLambdaFunctionQualifiedArn"
@@ -718,7 +718,7 @@
     "UpdateTaskByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateTaskByIdLambdaVersionDy9GOUfwrQtNXofLVcsm1xqgwGY0IcP9JgvUvQgpe0"
+        "Ref": "UpdateTaskByIdLambdaVersionXInGEBTB1M4hSfe7yRfVlPX2DZgNtfzPi3glRok"
       },
       "Export": {
         "Name": "sls-task-list-app-dev-UpdateTaskByIdLambdaFunctionQualifiedArn"
@@ -727,7 +727,7 @@
     "DeleteTaskByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteTaskByIdLambdaVersionTMMerZQ2KTGLEQZqbiXLh8y9wWvhtHNbJSQt0q7LU"
+        "Ref": "DeleteTaskByIdLambdaVersiondIxvDb08o65PqlpZsJJV50u4o5Z9nrBWX9zXKvkIY"
       },
       "Export": {
         "Name": "sls-task-list-app-dev-DeleteTaskByIdLambdaFunctionQualifiedArn"
