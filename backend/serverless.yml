@@ -29,14 +29,14 @@ functions:
           path: /tasks
           method: get
 
-  # # GET (One)
-  # getTask:
-  #   handler: handlers/handler.getTaskById
-  #   description: get all tasks from db
-  #   events:
-  #     - http:
-  #         path: /tasks/{id}
-  #         method: get
+  # GET (One)
+  getTask:
+    handler: handlers/handler.getTaskById
+    description: get a task from db by id
+    events:
+      - http:
+          path: /task/{taskId}
+          method: get
 
   # POST
   createTask:
@@ -44,16 +44,16 @@ functions:
     description: create a task into db
     events:
       - http:
-          path: /tasks
+          path: /task
           method: post
 
-  #  PUT
+  # PUT
   updateTaskById:
     handler: handlers/handler.updateTaskById
     description: update a task by id
     events:
       - http:
-          path: /tasks/{taskId}
+          path: /task/{taskId}
           method: put
 
   # DELETE
@@ -62,7 +62,7 @@ functions:
     description: delete a task in db by id
     events:
       - http:
-          path: /tasks/{taskId}
+          path: /task/{taskId}
           method: delete
 
 resources:
