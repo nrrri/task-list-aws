@@ -4,6 +4,9 @@ import { v4 } from "uuid";
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 const tableName = "TasksTable";
+const headers = {
+"content-type" : "application-json",
+}
 
 class HttpError extends Error {
   constructor(public statusCode: number, body: Record<string, unknown> = {}) {
@@ -31,6 +34,7 @@ const handleError = (e: unknown) => {
   if (e instanceof HttpError) {
     return {
       statusCode: e.statusCode,
+      headers,
       body: e.message,
     };
   }
@@ -48,6 +52,7 @@ export const getTasks = async (
     .promise();
   return {
     statusCode: 200,
+    headers,
     body: JSON.stringify(res.Items),
   };
 };
@@ -61,6 +66,7 @@ export const getTaskById = async (
 
     return {
       statusCode: 201, // means successfully created
+      headers,
       body: JSON.stringify(task),
     };
   } catch (e) {
@@ -88,6 +94,7 @@ export const createTask = async (
       .promise();
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify(newTask),
     };
   } catch (e) {
@@ -126,6 +133,7 @@ export const updateTaskById = async (
 
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify(task),
     };
   } catch (e) {
