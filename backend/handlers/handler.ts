@@ -1,12 +1,18 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import AWS from "aws-sdk";
 import { v4 } from "uuid";
+import * as yup from "yup";
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 const tableName = "TasksTable";
 const headers = {
-"content-type" : "application-json",
-}
+  "content-type": "application-json",
+};
+
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  completed: yup.bool().required(),
+});
 
 class HttpError extends Error {
   constructor(public statusCode: number, body: Record<string, unknown> = {}) {
@@ -31,6 +37,22 @@ const fetchTaskById = async (id: string) => {
 };
 
 const handleError = (e: unknown) => {
+  if (e instanceof yup.ValidationError) {
+    return {
+      statusCode: 400,
+      headers,
+      body: JSON.stringify({ errors: e.errors }),
+    };
+  }
+  if (e instanceof SyntaxError) {
+    return {
+      statusCode: 400,
+      headers,
+      body: JSON.stringify({
+        errors: `invalid request body format: ${e.message}`,
+      }),
+    };
+  }
   if (e instanceof HttpError) {
     return {
       statusCode: e.statusCode,
@@ -80,6 +102,9 @@ export const createTask = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const reqBody = JSON.parse(event.body as string);
+
+    await schema.validate(reqBody, { abortEarly: false });
+
     const newTask = {
       ...reqBody,
       completed: false,
@@ -109,7 +134,10 @@ export const updateTaskById = async (
   try {
     const id = event.pathParameters?.taskId as string;
     await fetchTaskById(id);
+
     const reqBody = JSON.parse(event.body as string);
+    await schema.validate(reqBody, { abortEarly: false });
+
     const res = await docClient
       .get({
         TableName: tableName,
