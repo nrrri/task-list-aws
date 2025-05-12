@@ -10,24 +10,14 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ setAllTasks }) => {
     const [newTask, setNewTask] = useState<string>('');
 
     const addNewTask = () => {
-        // try {
-        //     await axios.post<TaskType>(API_URL, {
-        //         name: newTask,
-        //         completed: false // as a default
-        //     })
-
-        //     await fetchTasks();
-        //     setNewTask('')
-        // } catch (error) {
-        //     console.log(error)
-        // }
-    const createId = new Date();
+        const createId = new Date();
         console.log('add new task')
         setAllTasks(prev => [...prev, {
             id: createId.toISOString(),
             name: newTask,
             completed: false
         }])
+        setNewTask('')
     }
 
     return (

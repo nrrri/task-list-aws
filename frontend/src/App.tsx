@@ -27,7 +27,7 @@ function App() {
       <AddTaskForm setAllTasks={setAllTasks} />
       {
         allTasks.map((task) => (
-          <Task task={task} key={task.id} allTasks={allTasks} setAllTasks={setAllTasks} />
+          <Task task={task} key={task.id} setAllTasks={setAllTasks} />
         ))
       }
     </div>
