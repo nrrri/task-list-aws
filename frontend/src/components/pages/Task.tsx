@@ -8,10 +8,10 @@ export interface TaskProps {
     setAllTasks: React.Dispatch<React.SetStateAction<TaskType[]>>;
 }
 export const Task: React.FC<TaskProps> = ({ task, setAllTasks }) => {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
     const [itemToUpdate, setItemToUpdate] = useState<TaskType>(task);
 
-    const handleDeleteTask = async (id: string) => {
+    const handleDeleteTask = (id: string) => {
         console.log(`delete ${id}`)
     }
 
@@ -21,8 +21,11 @@ export const Task: React.FC<TaskProps> = ({ task, setAllTasks }) => {
 
     }
 
-    const handleCheckmark = async () => {
-        setAllTasks(prev => prev.map(item => item.id === task.id ? { ...item, itemToUpdate } : item))
+    const handleCheckmark = () => {
+        setAllTasks(prev => prev.map(item => item.id === task.id ? {
+            ...item,
+            completed: !task.completed
+        } : item))
 
         console.log('handle check', itemToUpdate)
     }
@@ -32,23 +35,24 @@ export const Task: React.FC<TaskProps> = ({ task, setAllTasks }) => {
     }, [task])
 
     return (
-        <div className="flex flex-col gap-4 m-3">
+        <div className="flex flex-col">
             {
-                <div className="flex gap-4 items-center" key={itemToUpdate?.id}>
-                    <input type="checkbox" name={itemToUpdate?.name} id={itemToUpdate?.id} checked={itemToUpdate?.completed} onClick={() => {
+                <div className="flex gap-4 m-2 items-center border-b-1 p-1 pt-0 border-gray-200 w-[380px]" key={itemToUpdate?.id}>
+                    <input type="checkbox" className="h-5 w-5 cursor-pointer transition-all rounded shadow" name={itemToUpdate?.name} id={itemToUpdate?.id} checked={itemToUpdate?.completed} onClick={() => {
                         handleCheckmark()
                     }}
                     />
-                    <span className={`w-[150px] ${itemToUpdate?.completed ? 'line-through' : ''}`}>{itemToUpdate?.name}</span>
-                    <Trash2 size={30} color="#f62235" className="cursor-pointer duration-400" onClick={() => handleDeleteTask(itemToUpdate.id)} />
-                    <SquarePen size={30} color="#387aff" className="cursor-pointer duration-400" onClick={() => handleEdit(itemToUpdate)} />
+                    <span className={`grow text-xl ${itemToUpdate?.completed ? 'line-through' : ''}`}>{itemToUpdate?.name}</span>
+                    <Trash2 strokeWidth={1.5} size={24} color="#f62235" className="cursor-pointer duration-400" onClick={() => handleDeleteTask(itemToUpdate.id)} />
+                    <SquarePen strokeWidth={1.5} size={24} color="#387aff" className="cursor-pointer duration-400" onClick={() => handleEdit(itemToUpdate)} />
                 </div>
             }
             {/* todo: change ui */}
             {isDialogOpen && <UpdateTaskForm
-                fetchTasks={fetchTasks}
                 task={task}
-                setIsDialogOpen={setIsDialogOpen} />}
+                setIsDialogOpen={setIsDialogOpen}
+                isDialogOpen={isDialogOpen}
+                setAllTasks={setAllTasks} />}
         </div>
     )
 }

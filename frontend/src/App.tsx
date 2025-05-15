@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import { useState } from "react"
 import { AddTaskForm } from "./components/pages/AddTaskForm"
 import { Task } from "./components/pages/Task"
 import { TaskType } from "./components/TaskType"
@@ -7,29 +7,16 @@ import { TaskType } from "./components/TaskType"
 function App() {
   const [allTasks, setAllTasks] = useState<TaskType[]>([]);
 
-  // const fetchTasks = async () => {
-  //   try {
-  //     const response = await axios.get<TaskType[]>(API_URL)
-  //     const data = response.data
-  //     setAllTasks(data);
-
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchTasks()
-  // }, [])
-
   return (
-    <div className='flex flex-col items-center justify-center gap-4 my-52'>
+    <div className='flex flex-col items-center justify-center gap-2 my-52 w-[400px] mx-auto'>
       <AddTaskForm setAllTasks={setAllTasks} />
-      {
-        allTasks.map((task) => (
-          <Task task={task} key={task.id} setAllTasks={setAllTasks} />
-        ))
-      }
+      <div className="mt-2">
+        {
+          allTasks.map((task) => (
+            <Task task={task} key={task.id} setAllTasks={setAllTasks} />
+          ))
+        }
+      </div>
     </div>
 
   )
